@@ -12,7 +12,9 @@
     "socket.io": "^4.5.1"
   },
   "scripts": {
-    "start": "nodemon server"
+    "start": "nodemon server",
+    "prettier": "^2.6.2",
+    "react-router-dom": "6"
   },
   "format": "prettier --write \"*/**/*.{js,jsx,html}\"",
   "lint": "eslint \"src/**/*.{js,jsx,html}\" --quiet"
