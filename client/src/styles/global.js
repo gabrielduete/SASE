@@ -18,7 +18,7 @@ const GlobalStyles = createGlobalStyle`
   }
   
   body{
-    background-color: var(--black);
+    background-color: #080808;
     color: var(--white);
     font-family: var(--font-small);
     font-size: 0.95em;
