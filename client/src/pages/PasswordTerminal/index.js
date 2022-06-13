@@ -9,10 +9,10 @@ const PasswordTerminal = () => {
     <Container>
       <S.Wrapper>
         <h1>Hi!👋 Select you password</h1>
-        <div>
+        <S.WrapperButtons>
           <Button>Normal</Button>
           <Button>Prioritary</Button>
-        </div>
+        </S.WrapperButtons>
       </S.Wrapper>
     </Container>
   )

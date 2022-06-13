@@ -1,15 +1,14 @@
 import styled from 'styled-components'
 
-export const Wrapper = styled.main`
-  height: 100vh;
-  width: 100%;
-
+export const Wrapper = styled.section`
   align-items: center;
   display: flex;
   flex-direction: column;
 `
 
-export const Button = styled.button`
-  border-radius: 5px;
-  background-color: var(--red-high);
+export const WrapperButtons = styled.div`
+  width: 100%;
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-around;
 `

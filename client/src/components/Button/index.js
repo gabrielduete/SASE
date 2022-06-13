@@ -2,8 +2,8 @@ import React from 'react'
 
 import { RedButton } from './styles'
 
-const Button = ({ Children }) => {
-  return <RedButton>{Children}</RedButton>
+const Button = ({ children }) => {
+  return <RedButton>{children}</RedButton>
 }
 
 export default Button

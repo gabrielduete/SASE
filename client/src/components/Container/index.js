@@ -1,8 +1,8 @@
 import React from 'react'
-import { Wrapper } from './styles'
+import Wrapper from './styles'
 
-const Container = ({ Children }) => {
-  return <Wrapper>{Children}</Wrapper>
+const Container = ({ children }) => {
+  return <Wrapper>{children}</Wrapper>
 }
 
 export default Container
