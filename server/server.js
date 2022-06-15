@@ -9,6 +9,12 @@ const io = socket(server)
 const SERVER_HOST = 'localhost'
 const SERVER_PORT = 8080
 
+const express = require('express')
+const cors = require('cors')
+const api = express()
+
+const PORT = process.env.PORT || 8877
+
 const passwords = {
   normal: [],
   prioritary: [],
@@ -35,4 +41,25 @@ io.on('connection', socket => {
 
 server.listen(SERVER_PORT, SERVER_HOST, () => {
   console.log('[http] server running...')
+})
+
+// API
+api.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*')
+  api.use(cors())
+  next()
+})
+
+api.get('/', (req, res) => {
+  res.json({
+    msg: 'OK',
+  })
+})
+
+api.get('/passwords', (req, res) => {
+  res.json(passwords)
+})
+
+api.listen(PORT, () => {
+  console.log('[API] Executando na porta: ' + PORT)
 })
