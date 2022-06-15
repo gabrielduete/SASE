@@ -14,19 +14,22 @@ const passwords = {
   prioritary: [],
 }
 
+let N = 1
+let P = 1
+
 io.on('connection', socket => {
   console.log('[IO] Connection => server has a new connection')
 
   socket.on('password.send', data => {
     data === 'normal'
-      ? passwords['normal'].push(data)
-      : passwords['prioritary'].push(data)
+      ? passwords['normal'].push(`N${N++}`)
+      : passwords['prioritary'].push(`P${P++}`)
     console.log('[SOCKET] password type => ', data)
     console.log(passwords)
   })
 
   socket.on('disconnect', () => {
-    console.log('[SOCKET] Disconnect')
+    console.log('[SOCKET] User Disconnect')
   })
 })
 
