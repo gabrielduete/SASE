@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { render } from '@testing-library/react'
-import Home from '..'
+import ServicePassword from '..'
 
-describe('Home', () => {
+describe('ServicePassword', () => {
   it('Should render the component', () => {
     it.todo('a')
   })
