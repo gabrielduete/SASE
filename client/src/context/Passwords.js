@@ -1,19 +1,28 @@
-import { useState, useContext, createContext } from 'react'
+import { useEffect, useState, useContext, createContext } from 'react'
+
+import { apiPasswords } from '../api'
 
 const PasswordsContext = createContext()
 
 export default function PasswordsProvider({ children }) {
-  let normal = 1
-  let prioritary = 1
+  const [allNormal, setAllNormal] = useState([])
+  const [allPrioritary, setAllPrioritary] = useState([])
 
-  const [allPass, setAllPass] = useState({
-    normal: [],
-    prioritary: [],
-  })
+  const handlePasswords = () => {
+    apiPasswords().then(response => {
+      setAllNormal([...allNormal, response.data.normal])
+      setAllPrioritary([...allPrioritary, response.data.prioritary])
+      console.log('a')
+    })
+  }
+
+  useEffect(() => {
+    handlePasswords()
+  }, [])
 
   return (
     <PasswordsContext.Provider
-      value={{ normal, prioritary, allPass, setAllPass }}
+      value={{ allNormal, setAllNormal, allPrioritary, setAllPrioritary }}
     >
       {children}
     </PasswordsContext.Provider>
@@ -23,7 +32,7 @@ export default function PasswordsProvider({ children }) {
 export function usePassword() {
   const context = useContext(PasswordsContext)
 
-  const { normal, prioritary, allPass, setAllPass } = context
+  const { allNormal, setAllNormal, allPrioritary, setAllPrioritary } = context
 
-  return { normal, prioritary, allPass, setAllPass }
+  return { allNormal, setAllNormal, allPrioritary, setAllPrioritary }
 }

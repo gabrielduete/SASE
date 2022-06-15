@@ -1,27 +1,24 @@
 import React from 'react'
-import Container from '../../components/Container'
-import Button from '../../components/Button'
-
 import io from 'socket.io-client'
 
+import Container from '../../components/Container'
+import Button from '../../components/Button'
 import { usePassword } from '../../context/Passwords'
+
 import * as S from './styles'
 
 const socket = io('http://localhost:8080', { transports: ['websocket'] })
 socket.on('connect', () => console.log('New Connection'))
 
 const PasswordTerminal = () => {
-  const { allPass } = usePassword()
-  let { normal, prioritary } = usePassword()
-
   const selectPassword = category => {
     socket.emit('password.send', category)
-    category === 'normal'
-      ? allPass['normal'].push(`N${normal++}`)
-      : allPass['prioritary'].push(`P${prioritary++}`)
-
-    console.log(allPass)
   }
+
+  const { allNormal, allPrioritary } = usePassword()
+
+  console.log(allNormal[0])
+  console.log(allPrioritary[0])
 
   return (
     <Container>
