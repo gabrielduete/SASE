@@ -18,20 +18,39 @@ const PORT = process.env.PORT || 8877
 const passwords = {
   normal: [],
   prioritary: [],
+  all: [],
 }
 
 let N = 1
 let P = 1
 
+const getNormalPassword = () => {
+  const value = `N${N++}`
+  passwords['normal'].push(value)
+  passwords['all'].push(value)
+}
+
+const getPrioritaryPassword = () => {
+  const value = `P${P++}`
+  passwords['prioritary'].push(value)
+  passwords['all'].push(value)
+}
+
+const getData = data => {
+  data === 'normal' ? getNormalPassword() : getPrioritaryPassword()
+
+  passwords[data]
+}
+
 io.on('connection', socket => {
   console.log('[IO] Connection => server has a new connection')
 
   socket.on('password.send', data => {
-    data === 'normal'
-      ? passwords['normal'].push(`N${N++}`)
-      : passwords['prioritary'].push(`P${P++}`)
+    getData(data)
+
     console.log('[SOCKET] password type => ', data)
-    console.log(passwords)
+
+    io.sockets.emit('object.passwords', passwords)
   })
 
   socket.on('disconnect', () => {
