@@ -38,19 +38,23 @@ const getPrioritaryPassword = () => {
 
 const getData = data => {
   data === 'normal' ? getNormalPassword() : getPrioritaryPassword()
-
-  passwords[data]
 }
 
 io.on('connection', socket => {
   console.log('[IO] Connection => server has a new connection')
 
   socket.on('password.send', data => {
-    getData(data)
-
     console.log('[SOCKET] password type => ', data)
 
+    console.log(passwords)
+
+    getData(data)
     io.sockets.emit('object.passwords', passwords)
+  })
+
+  socket.on('password.next', data => {
+    console.log(data)
+    io.sockets.emit('password.next', true)
   })
 
   socket.on('disconnect', () => {
@@ -60,25 +64,4 @@ io.on('connection', socket => {
 
 server.listen(SERVER_PORT, SERVER_HOST, () => {
   console.log('[http] server running...')
-})
-
-// API
-api.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*')
-  api.use(cors())
-  next()
-})
-
-api.get('/', (req, res) => {
-  res.json({
-    msg: 'OK',
-  })
-})
-
-api.get('/passwords', (req, res) => {
-  res.json(passwords)
-})
-
-api.listen(PORT, () => {
-  console.log('[API] Executando na porta: ' + PORT)
 })

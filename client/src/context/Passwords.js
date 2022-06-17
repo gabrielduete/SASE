@@ -18,8 +18,11 @@ export default function PasswordsProvider({ children }) {
       value={{
         getData,
         allNormal,
+        setAllNormal,
         allPrioritary,
+        setAllPrioritary,
         allPasswords,
+        setAllPasswords,
       }}
     >
       {children}
@@ -30,7 +33,25 @@ export default function PasswordsProvider({ children }) {
 export function usePassword() {
   const context = useContext(PasswordsContext)
 
-  const { getData, allPasswords, allNormal, setAllNormal } = context
+  const {
+    getData,
+    allNormal,
+    setAllNormal,
+    allPrioritary,
+    setAllPrioritary,
+    allPasswords,
+    setAllPasswords,
+    nextPassword,
+  } = context
 
-  return { getData, allPasswords, allNormal, setAllNormal }
+  return {
+    getData,
+    allNormal,
+    setAllNormal,
+    allPrioritary,
+    setAllPrioritary,
+    allPasswords,
+    setAllPasswords,
+    nextPassword,
+  }
 }
