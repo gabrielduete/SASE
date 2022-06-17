@@ -27,15 +27,18 @@ const PasswordTerminal = () => {
     <Container>
       <S.Wrapper>
         <h1>Hi!👋 Select you password</h1>
+
         <S.WrapperButtons>
           <Button onClick={() => selectPassword('normal')}>Normal</Button>
           <Button onClick={() => selectPassword('prioritary')}>
             Prioritary
           </Button>
         </S.WrapperButtons>
-        <S.CurrentPassword>
-          Your passoword: <span>{currentPassword}</span>
-        </S.CurrentPassword>
+        {currentPassword !== undefined && (
+          <S.CurrentPassword>
+            Your passoword: <span>{currentPassword}</span>
+          </S.CurrentPassword>
+        )}
       </S.Wrapper>
     </Container>
   )
