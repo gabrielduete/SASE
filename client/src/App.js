@@ -4,11 +4,10 @@ import Display from './pages/DisplayTerminal/index'
 import Password from './pages/PasswordTerminal/index'
 import Service from './pages/ServiceTerminal/index'
 import GlobalStyles from './styles/global'
-import PasswordsProvider from './context/Passwords'
 
 function App() {
   return (
-    <PasswordsProvider>
+    <>
       <GlobalStyles />
       <Routes>
         <Route path='/' element={<Home />} />
@@ -16,7 +15,7 @@ function App() {
         <Route path='/service' element={<Service />} />
         <Route path='/display' element={<Display />} />
       </Routes>
-    </PasswordsProvider>
+    </>
   )
 }
 
