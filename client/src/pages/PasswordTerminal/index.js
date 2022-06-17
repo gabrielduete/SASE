@@ -8,17 +8,20 @@ import { usePassword } from '../../context/Passwords'
 import * as S from './styles'
 
 const socket = io('http://localhost:8080', { transports: ['websocket'] })
-socket.on('connect', () => console.log('New Connection'))
+socket.on('connect', () => console.log('[SOCKET] => New Connection'))
 
 const PasswordTerminal = () => {
+  const { getData, allPasswords } = usePassword()
+
+  const currentPassword = allPasswords[allPasswords.length - 1]
+
   const selectPassword = category => {
     socket.emit('password.send', category)
+
+    socket.on('object.passwords', data => {
+      getData(data)
+    })
   }
-
-  const { allNormal, allPrioritary } = usePassword()
-
-  console.log(allNormal[0])
-  console.log(allPrioritary[0])
 
   return (
     <Container>
@@ -30,6 +33,9 @@ const PasswordTerminal = () => {
             Prioritary
           </Button>
         </S.WrapperButtons>
+        <S.CurrentPassword>
+          Your passoword: <span>{currentPassword}</span>
+        </S.CurrentPassword>
       </S.Wrapper>
     </Container>
   )

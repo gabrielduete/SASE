@@ -23,6 +23,10 @@ const GlobalStyles = createGlobalStyle`
     font-family: var(--font-small);
     font-size: 0.95em;
   }
+
+  span{
+    color: var(--red-high);
+  }
   
   *{
     box-sizing: border-box;
