@@ -8,7 +8,7 @@ import { usePassword } from '../../context/Passwords'
 import * as S from './styles'
 
 const socket = io('http://localhost:8080', { transports: ['websocket'] })
-socket.on('connect', () => console.log('[SOCKET] => New Connection'))
+socket.on('connect', () => console.log('[SOCKET] [USER] => New Connection'))
 
 const PasswordTerminal = () => {
   const { getData, allPasswords } = usePassword()

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import Container from '../../components/Container'
 import io from 'socket.io-client'
-import { usePassword } from '../../context/Passwords'
 
 import * as S from './style'
 
@@ -11,18 +10,8 @@ socket.on('connect', () => console.log('[SOCKET] [DISPLAY] => New Connection'))
 const DisplayTerminal = () => {
   const [password, setPassword] = useState()
 
-  const { getData, allPasswords } = usePassword()
-
-  const getPassword = () => {
-    setPassword(allPasswords[allPasswords.length - 1])
-  }
-
-  socket.on('object.passwords', data => {
-    getData(data)
-  })
-
-  socket.on('password.next', data => {
-    getPassword()
+  socket.on('password.tv.update', data => {
+    setPassword(data)
   })
 
   return (

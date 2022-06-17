@@ -38,21 +38,23 @@ io.on('connection', socket => {
   console.log('[IO] Connection => server has a new connection')
 
   socket.on('password.send', data => {
-    console.log('[SOCKET] password type => ', data)
-
-    console.log(passwords)
+    console.log('[SOCKET SERVER] New password type => ', data)
 
     getData(data)
     io.sockets.emit('object.passwords', passwords)
   })
 
   socket.on('password.next', data => {
-    console.log(data)
-    io.sockets.emit('password.next', true)
+    const firstPassword = passwords['all'][0]
+    passwords['all'].splice(0, 1)
+
+    io.sockets.emit('password.next', firstPassword)
+    io.sockets.emit('password.tv.update', firstPassword)
+    io.sockets.emit(`password.tv.${data}`, firstPassword)
   })
 
   socket.on('disconnect', () => {
-    console.log('[SOCKET] User Disconnect')
+    console.log('[SOCKET SERVER] User Disconnect')
   })
 })
 
