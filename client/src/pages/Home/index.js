@@ -12,7 +12,6 @@ const Home = () => {
 
   return (
     <Container>
-      <Button onClick={() => handleNavigate('/sea')}>Service Password</Button>
       <Button onClick={() => handleNavigate('/password')}>
         Password Terminal
       </Button>

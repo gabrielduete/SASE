@@ -4,6 +4,7 @@ export const RedButton = styled.button`
   border-radius: 5px;
   text-transform: uppercase;
 
+  padding: 0 10px;
   color: var(--white);
   height: 40px;
   width: 120px;
