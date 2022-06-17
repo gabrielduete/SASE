@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import io from 'socket.io-client'
 
 import Container from '../../components/Container'
 import Button from '../../components/Button'
-import { usePassword } from '../../context/Passwords'
 
 import * as S from './styles'
 
@@ -11,17 +10,16 @@ const socket = io('http://localhost:8080', { transports: ['websocket'] })
 socket.on('connect', () => console.log('[SOCKET] [USER] => New Connection'))
 
 const PasswordTerminal = () => {
-  const { getData, allPasswords } = usePassword()
-
-  const currentPassword = allPasswords[allPasswords.length - 1]
+  const [currentPassword, setCurrentPassword] = useState()
 
   const selectPassword = category => {
     socket.emit('password.send', category)
-
-    socket.on('object.passwords', data => {
-      getData(data)
-    })
   }
+
+  socket.on('object.passwords', data => {
+    const allPasswords = data['all']
+    setCurrentPassword(allPasswords[allPasswords.length - 1])
+  })
 
   return (
     <Container>
