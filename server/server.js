@@ -17,16 +17,19 @@ const passwords = {
 
 let N = 1
 let P = 1
+let count = 0
 
 const getNormalPassword = () => {
   const value = `N${N++}`
   passwords['normal'].push(value)
+
   passwords['all'].push(value)
 }
 
 const getPrioritaryPassword = () => {
   const value = `P${P++}`
   passwords['prioritary'].push(value)
+
   passwords['all'].push(value)
 }
 
@@ -34,8 +37,16 @@ const getData = data => {
   data === 'normal' ? getNormalPassword() : getPrioritaryPassword()
 }
 
+const handleNextPassword = (data, firstPassword) => {
+  io.sockets.emit('password.next', firstPassword)
+  io.sockets.emit('password.tv.update', firstPassword)
+  io.sockets.emit(`password.tv.${data}`, firstPassword)
+
+  console.log(`[SOCKET] [SERVER] => NEXT PASSWORD ${firstPassword}`)
+}
+
 io.on('connection', socket => {
-  console.log('[IO] Connection => server has a new connection')
+  console.log('[IO - CLIENT] Connection => server has a new connection')
 
   socket.on('password.send', data => {
     console.log('[SOCKET SERVER] New password type => ', data)
@@ -46,11 +57,26 @@ io.on('connection', socket => {
 
   socket.on('password.next', data => {
     const firstPassword = passwords['all'][0]
-    passwords['all'].splice(0, 1)
 
-    io.sockets.emit('password.next', firstPassword)
-    io.sockets.emit('password.tv.update', firstPassword)
-    io.sockets.emit(`password.tv.${data}`, firstPassword)
+    const isNormalPassword = firstPassword?.startsWith('N') && count < 2
+
+    if (isNormalPassword) {
+      handleNextPassword(data, firstPassword)
+      passwords['all'].splice(0, 1)
+
+      count++
+    } else {
+      for (let i = 0; i <= passwords['all'].length; i++) {
+        const firstPassword = passwords['all'][i]
+
+        if (passwords['all'][i]?.startsWith('P')) {
+          handleNextPassword(data, firstPassword)
+          passwords['all'].splice(i, 1)
+          count = 0
+          break
+        }
+      }
+    }
   })
 
   socket.on('disconnect', () => {
@@ -59,5 +85,9 @@ io.on('connection', socket => {
 })
 
 server.listen(SERVER_PORT, SERVER_HOST, () => {
-  console.log('[http] server running...')
+  console.log('[http] Server running...')
+})
+
+server.off('server.off', () => {
+  console.log('[http] Server stopping...')
 })
