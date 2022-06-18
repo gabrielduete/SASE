@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "koa": "^2.13.4",
+    "nodemon": "^2.0.16",
+    "prettier": "^2.6.2",
+    "socket.io": "^4.5.1"
+  },
+  "scripts": {
+    "start": "nodemon server",
+    "prettier": "^2.6.2",
+    "react-router-dom": "6",
+    "styled-components": "^5.3.5"
+  },
+  "format": "prettier --write \"*/**/*.{js,jsx,html}\"",
+  "lint": "eslint \"src/**/*.{js,jsx,html}\" --quiet"
+}
