@@ -46,20 +46,20 @@ senhas que estão em atendimento ou aquelas que já foram atendidas.
 2. Ser Implementado em qualquer linguagem de programação;
 3. Utilizar sockets para comunicação entre os módulos TS, TA, TV e SRV;
 4. Os módulos devem:
-5. TS: (a) Gerar dois tipos de SEA: Normal (N) ou Prioritário (P); (b) Gerar as
-   SEAs em ordem crescente. Exs; N1, N2, N3, P1, P2, P3,... ; (c) Enviar as SEAs
-   geradas para o SRV;
-6. TA: (a) Solicitar uma SEA ao SRV; (b) Receber, após solicitação, uma SEA do
-   SRV; (c) A SEA recebida deve ter sido gerada anteriormente no TS; (d)
-   Informar a SEA recebida;
-7. TV: (a) Receber uma SEA do servidor; (b) A SEA recebida deve ter sido gerada
-   anteriormente no TS; (c) A SEA recebida deve ser a mesma solicitada e
-   recebida por um TA; (d) Informar a SEA recebida;
-8. SRV: (a) Registrar as SEAs geradas pelo TS; (b) Informar o instante em que
-   recebeu uma nova SEA do TS; (c) Enviar as SEAs registradas aos TAs e TVs,
-   quando um TA solicitar uma nova SEA. Para cada duas SEAs do tipo N
+5. TS: </br>(a) Gerar dois tipos de SEA: Normal (N) ou Prioritário (P); </br>
+   (b) Gerar as SEAs em ordem crescente. Exs; N1, N2, N3, P1, P2, P3,... ;
+   </br>(c) Enviar as SEAs geradas para o SRV;
+6. TA:</br> (a) Solicitar uma SEA ao SRV; </br>(b) Receber, após solicitação,
+   uma SEA do SRV;</br> (c) A SEA recebida deve ter sido gerada anteriormente no
+   TS;</br> (d) Informar a SEA recebida;
+7. TV:</br> (a) Receber uma SEA do servidor;</br> (b) A SEA recebida deve ter
+   sido gerada anteriormente no TS; </br>(c) A SEA recebida deve ser a mesma
+   solicitada e recebida por um TA;</br> (d) Informar a SEA recebida;
+8. SRV:</br> (a) Registrar as SEAs geradas pelo TS; </br>(b) Informar o instante
+   em que recebeu uma nova SEA do TS;</br> (c) Enviar as SEAs registradas aos
+   TAs e TVs, quando um TA solicitar uma nova SEA. Para cada duas SEAs do tipo N
    informadas, a próxima SEA deverá ser obrigatoriamente do tipo P, se houver.
-   (d) Informar o instante em que enviou uma SEA para TA e TV.
+   </br> (d) Informar o instante em que enviou uma SEA para TA e TV.
 
 # Tecnologias
 
