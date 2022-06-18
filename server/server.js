@@ -76,6 +76,8 @@ io.on('connection', socket => {
           break
         }
       }
+
+      count = 0
     }
   })
 
