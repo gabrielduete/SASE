@@ -63,8 +63,11 @@ senhas que estão em atendimento ou aquelas que já foram atendidas.
 
 # Tecnologias
 
-- [NodeJS](https://nodejs.org/en/)
 - [Socket.IO](https://socket.io/)
+- [NodeJS](https://nodejs.org/en/)
+- [Express](https://expressjs.com/pt-br/)
+- [Koa](https://devdocs.io/koa/)
+- [Styled-Components](https://styled-components.com/)
 - [ReactJS](https://pt-br.reactjs.org/)
 
 # Como rodar
